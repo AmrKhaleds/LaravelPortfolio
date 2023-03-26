@@ -8,5 +8,8 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    
+    public function showProject(string $slug){
+        $getProject = Project::where('slug', $slug)->firstOrFail();
+        return view('front.projects.show', compact('getProject'));
+    }
 }

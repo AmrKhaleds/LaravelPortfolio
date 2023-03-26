@@ -23,17 +23,18 @@ class ProjectRequest extends FormRequest
     {
         return [
             'name'              => 'required|string|max:70',
+            'slug'              => 'required|string|max:50',
             'short_description' => 'required|string|max:150',
-            'image'             => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'brand_logo'             => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'image'             => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'brand_logo'             => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             // 'image_path'        => 'string',
             'long_description'  => 'string|max:500',
-            'brand_logo'        => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'client'            => 'string|max:70',
-            'industry'          => 'string|max:70',
-            'services'          => 'string|max:70',
-            'date'              => 'date',
-            'website'           => 'string',
+            // 'brand_logo'        => 'image|mimes:jpeg,png,jpg,gif',
+            'client'            => 'nullable|string|max:70',
+            'industry'          => 'nullable|string|max:70',
+            'services'          => 'nullable|string|max:70',
+            'date'              => 'nullable|date',
+            'website'           => 'nullable|string',
         ];
     }
 }

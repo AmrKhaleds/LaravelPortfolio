@@ -7,11 +7,11 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="">Dashboard </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href=""> أللغات </a>
+                                <li class="breadcrumb-item"><a href=""> Projects </a>
                                 </li>
-                                <li class="breadcrumb-item active">تعديل لغة
+                                <li class="breadcrumb-item active">Edit {{ $projectId->name }}
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تعديل لغة </h4>
+                                    <h4 class="card-title" id="basic-layout-form">Edit Project</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -48,13 +48,25 @@
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i>Project Info</h4>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="name">Project Name</label>
                                                             <input type="text" value="{{ $projectId->name }}" id="name"
                                                                 class="form-control" placeholder="Project Name"
                                                                 name="name">
                                                                 @error('name')
+                                                                    <span id="name_error" class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="slug">Project Slug</label>
+                                                            <input type="text" value="{{ $projectId->slug }}" id="slug"
+                                                                class="form-control" placeholder="Project Slug"
+                                                                name="slug">
+                                                                @error('slug')
                                                                     <span id="name_error" class="text-danger">{{ $message }}</span>
                                                                 @enderror
                                                         </div>

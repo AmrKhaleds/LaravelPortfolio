@@ -1,8 +1,8 @@
 @extends('layouts.admin.index')
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/file-uploaders/dropzone.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/ui/prism.min.css') }}">
+    
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/file-uploaders/dropzone.css') }}"> --}}
+    
 
 @endsection
 @section('content')
@@ -42,8 +42,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                                {{-- @include('admin.includes.alerts.success')
-                                @include('admin.includes.alerts.errors') --}}
+                                @include('admin.includes.alerts.success')
+                                @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form" method="POST" action="{{ route('project.store') }}" enctype="multipart/form-data">
@@ -51,7 +51,7 @@
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i>Project Info</h4>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="name">Project Name</label>
                                                             <input type="text" value="{{ old('name') }}" id="name"
@@ -63,10 +63,22 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="slug">Project Slug</label>
+                                                            <input type="text" value="{{ old('slug') }}" id="slug"
+                                                                class="form-control" placeholder="Project Slug"
+                                                                name="slug">
+                                                                @error('slug')
+                                                                    <span id="name_error" class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="shortDescription">Short Description</label>
-                                                            <textarea name="short_description" id="shortDescription" value="{{ old('short_description') }}"  class="form-control"></textarea>
+                                                            <textarea name="short_description" id="shortDescription" value="{{ old('short_description') }}"  class="form-control">{{ old('short_description') }}</textarea>
                                                             @error('short_description')
                                                                 <span id="abbr_error" class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -142,7 +154,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="longtDescription">Long Description</label>
-                                                            <textarea name="long_description" id="longtDescription" value="{{ old('long_description') }}"  class="form-control"></textarea>
+                                                            <textarea name="long_description" id="longtDescription" class="form-control">{{ old('long_description') }}</textarea>
                                                             @error('long_description')
                                                                 <span id="abbr_error" class="text-danger">{{ $message }}</span>
                                                             @enderror
@@ -175,7 +187,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                {{-- <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="date">Project Assets</label>
+                                                            <input type="file" name="files[]" id="formFileLg" class="form-control form-control-lg" multiple>
+                                                                @error('date')
+                                                                    <span id="name_error" class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
                                                 {{-- <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
@@ -208,8 +230,4 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/admin/js/scripts/extensions/dropzone.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/admin/vendors/js/ui/prism.min.js') }}" type="text/javascript"></script>
-
 @endsection

@@ -3,7 +3,7 @@
     <head>
         <!-- title -->
         {{-- {{ $title = @yield("title") }} --}}
-        <title>{{ config('settings.site_name') }}</title>
+        <title>@yield('title')</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
@@ -39,6 +39,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/front/revolution/css/navigation.css') }}">
         <!-- bootsnav -->
         <link rel="stylesheet" href="{{ asset('assets/front/css/bootsnav.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/front/css/team-styles.css') }}">
+        {{-- /var/www/html/laravelPro/addYou/public/assets/front/css/team-styles.css --}}
         <!-- style -->
         <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}" />
         <!-- responsive css -->
@@ -48,7 +50,10 @@
         <![endif]-->
     </head>
     <body>
+        @include('front.includes.navbar')
         @yield('content')
+        @include('front.includes.footer')
+        
         <!-- start scroll to top -->
         <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>  
         <!-- end scroll to top -->
@@ -58,7 +63,7 @@
         <script type="text/javascript" src="{{ asset('assets/front/js/bootstrap.bundle.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/front/js/jquery.easing.1.3.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/front/js/skrollr.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/front/js/smooth-scroll.js') }}"></script>
+        <script src="https://cdn.statically.io/gh/kswedberg/jquery-smooth-scroll/3948290d/jquery.smooth-scroll.min.js"></script>
         <script type="text/javascript" src="{{ asset('assets/front/js/jquery.appear.js') }}"></script>
         <!-- menu navigation -->
         <script type="text/javascript" src="{{ asset('assets/front/js/bootsnav.js') }}"></script>
@@ -94,7 +99,7 @@
         <!--pie chart-->
         <script type="text/javascript" src="{{ asset('assets/front/js/jquery.easypiechart.min.js') }}"></script>
         <!-- instagram -->
-        <script type="text/javascript" src="{{ asset('assets/front/js/instafeed.min.js') }}"></script>
+        {{-- <script type="text/javascript" src="{{ asset('assets/front/js/instafeed.min.js') }}"></script> --}}
         <!-- retina -->
         <script type="text/javascript" src="{{ asset('assets/front/js/retina.min.js') }}"></script>
         <!-- revolution -->
@@ -112,5 +117,17 @@
         <script type="text/javascript" src="{{ asset('assets/front/revolution/js/extensions/revolution.extension.video.min.js') }}"></script>
         <!-- setting -->
         <script type="text/javascript" src="{{ asset('assets/front/js/main.js') }}"></script>
+
+        <script>
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+        </script>
     </body>
 </html>

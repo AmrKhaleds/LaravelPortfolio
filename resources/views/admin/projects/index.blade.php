@@ -35,12 +35,8 @@
                                     </ul>
                                 </div>
                             </div>
-                            @if(Session::has('errors'))
-                                {{ Session::get('errors') }}
-                            @endif
-                            {{-- @include('admin.includes.alerts.success')
-                            @include('admin.includes.alerts.errors') --}}
-
+                            @include('admin.includes.alerts.success')
+                            @include('admin.includes.alerts.errors')
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
                                     <table class="table display nowrap table-striped table-bordered ">
@@ -65,14 +61,17 @@
                                                         <td>{{ $project->client }}</td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                                <a href="{{ route('project.edit', $project->id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                <a href="{{ route('project.show', $project->slug) }}" target="_blank" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                    SHOW
+                                                                </a>
+                                                                <a href="{{ route('project.edit', $project->id) }}" class="btn btn-outline-secondary btn-min-width box-shadow-3 mr-1 mb-1">
                                                                     UPDATE
                                                                 </a>
                                                                 <form action="{{ route('project.destroy', $project->id) }}" method="POST">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button type="submit"
-                                                                        class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">DELETE</button>
+                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">DELETE</button>
                                                                 </form>
                                                             </div>
                                                         </td>
@@ -95,10 +94,10 @@
 
 @section('scripts')
 <script type="text/javascript">
-    $(document).ready(function(){
-
-      // DataTable
-      $('#empTable').DataTable();
+    $(document).ready(function() {
+        setTimeout(() => {
+            $('.toast').fadeOut();
+        }, 3000);
     });
 </script>
 @endsection

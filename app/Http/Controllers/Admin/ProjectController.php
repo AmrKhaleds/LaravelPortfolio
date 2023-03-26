@@ -12,6 +12,19 @@ class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:project-list|project-create|project-edit|project-delete', ['only' => ['index']]);
+        $this->middleware('permission:project-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:project-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:project-delete', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
      */
     public function index()
     {
@@ -28,32 +41,51 @@ class ProjectController extends Controller
     }
 
     /**
+     * Uploads an image file and stores it in the storage/app/public/images directory.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @param string $field
+     * @return string  The path to the stored image file
+     */
+    private function uploadImage(Request $request, $field)
+    {
+        // Get the uploaded image
+        $image = $request->file($field);
+
+        // Generate a unique filename for the image
+        $filename = time() . '_' . $image->getClientOriginalName();
+
+        // Store the image in the storage/app/public/images directory
+        $image->storeAs('public/images', $filename);
+
+        // Return the path to the stored image
+        return $filename;
+    }
+    /**
      * Store a newly created resource in storage.
      */ 
     public function store(ProjectRequest $request)
     {
         $requestData = $request->except(['_token']);
-
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('public/images', $imageName);
-        $requestData['image'] = $imageName;
-
-        $brandLogo = $request->file('brand_logo');
-        $brandName = time() . '.' . $brandLogo->getClientOriginalExtension();
-        $image->storeAs('public/images', $brandName);
-        $requestData['brand_logo'] = $brandName;
-
-        Project::create($requestData);
-        return redirect()->route('project.index');
+        // Create project Image
+        $requestData['image'] = $this->uploadImage($request, 'image');
+        // Create Brand Logo
+        $requestData['brand_logo'] = $this->uploadImage($request, 'brand_logo');
+        // dd($requestData);
+        $createProject = Project::create($requestData);
+        if($createProject){
+            return redirect()->route('project.index')->with(['success' => 'Project Created Successfully']);
+        }else{
+            return redirect()->route('project.index')->with(['error' => 'An error occurred during creation']);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        return redirect(url('/project/' . $slug));
     }
 
     /**
@@ -70,21 +102,30 @@ class ProjectController extends Controller
      */
     public function update(ProjectRequest $request, string $id)
     {
+        $project = Project::findOrFail($id);
+
         $requestData = $request->except(['_method', '_token']);
-
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('public/images', $imageName);
-        $requestData['image'] = $imageName;
-
-        $brandLogo = $request->file('brand_logo');
-        $brandName = time() . '.' . $brandLogo->getClientOriginalExtension();
-        $image->storeAs('public/images', $brandName);
-        $requestData['brand_logo'] = $brandName;
-
+        if(empty($request->file('image'))){
+            $requestData['image'] = $project->image;
+            // dd($requestData);
+        }else{
+            // Update Project Image
+            $requestData['image'] = $this->uploadImage($request, 'image');
+        }
+        
+        if(empty($request->file('brand_logo'))){
+            $requestData['brand_logo'] = $project->brand_logo;
+        }else{
+            // Update Project logo
+            $requestData['brand_logo'] = $this->uploadImage($request, 'brand_logo');
+        }
         // dd($requestData);
-        Project::where('id', $id)->update($requestData);
-        return redirect()->route('project.index');
+        $updateProject = Project::where('id', $id)->update($requestData);
+        if($updateProject){
+            return redirect()->route('project.index')->with(['success' => 'Project Updated Successfully']);
+        }else{
+            return redirect()->route('project.index')->with(['error' => 'An error occurred during updating']);
+        }
     }
 
     /**
