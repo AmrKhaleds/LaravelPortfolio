@@ -5,7 +5,7 @@
         <div class="container-fluid nav-header-container">
             <!-- start logo -->
             <div class="col-auto col-md-2 pl-0">
-                <a href="{{ url('/') }}" title="AddYou" class="logo"><img src="{{asset('storage/images/logo/' . $white_logo)}}" data-rjs="{{ asset('assets/front/images/logo@2x.png') }}" class="logo-dark default" alt="AddYou"><img src="{{asset('storage/images/logo/' . $black_logo)}}" data-rjs="{{ asset('assets/front/images/logo-full-white@2x.png') }}" alt="AddYou" class="logo-light"></a>
+                <a href="{{ url('/') }}" title="AddYou" class="logo"><img src="{{asset('storage/images/logo/' . $white_logo)}}" data-rjs="{{asset('storage/images/logo/' . $white_logo)}}" class="logo-dark default" alt="AddYou"><img src="{{asset('storage/images/logo/' . $black_logo)}}" data-rjs="{{asset('storage/images/logo/' . $black_logo)}}" alt="AddYou" class="logo-light"></a>
             </div>
             <!-- end logo -->
             <div class="col accordion-menu pr-0 pr-lg-3">
