@@ -300,7 +300,7 @@
                         data-y="['middle','middle','middle','middle']" data-voffset="['70','70','70','70']" 
                         data-width="none"
                         data-height="none"
-                        data-whitespace="['nowrap','nowrap','nowrap','normal']" 
+                        {{-- data-whitespace="['nowrap','nowrap','nowrap','normal']"  --}}
 
                         data-type="button"
                         data-responsive_offset="on" 
