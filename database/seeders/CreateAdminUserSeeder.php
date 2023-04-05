@@ -22,9 +22,9 @@ class CreateAdminUserSeeder extends Seeder
             'role'      => ['SuperAdmin'],
             'status'    => '1'
         ]);
-        // $role = Role::create(['name' => 'SuperAdmin']);
-        // $permissions = Permission::pluck('id', 'id')->all();
-        // $role->syncPermissions($permissions);
+        $role = Role::create(['name' => 'SuperAdmin']);
+        $permissions = Permission::pluck('id', 'id')->all();
+        $role->syncPermissions($permissions);
         $user->assignRole('SuperAdmin');
 
     }

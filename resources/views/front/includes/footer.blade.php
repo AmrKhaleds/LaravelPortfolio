@@ -11,7 +11,7 @@
                 <!-- start logo -->
                 <div class="col-lg-4 col-md-2 text-center sm-margin-10px-bottom">
                     {{-- {{  }} --}}
-                    <a href="index.html"><img class="footer-logo" src="{{ asset('assets/front/images/logo/' . config("settings.logo_path")) }}" data-rjs="{{ asset('assets/front/images/logo-white@2x.png') }}" alt="Pofo"></a>
+                    <a href="index.html"><img class="footer-logo" src="{{asset('storage/images/logo/' . $black_logo)}}" data-rjs="{{ asset('assets/front/images/logo-white@2x.png') }}" alt="Pofo"></a>
                 </div>
                 <!-- end logo -->
                 <!-- start social media -->
@@ -36,7 +36,7 @@
                 <!-- start about -->
                 <div class="col-lg-3 col-md-6 widget md-margin-30px-bottom text-center text-md-left last-paragraph-no-margin">
                     <div class="widget-title alt-font text-small text-medium-gray text-uppercase margin-15px-bottom font-weight-600">About Agency</div>
-                    <p class="text-small width-95 sm-width-100">{{config('settings.about')}}</p>
+                    <p class="text-small width-95 sm-width-100">{{ $about }}</p>
                 </div>
                 <!-- end about -->
                 <!-- start blog post -->
@@ -67,7 +67,7 @@
                 <!-- start newsletter -->
                 <div class="col-lg-3 col-md-6 widget md-margin-30px-bottom text-center text-md-left">
                     <div class="widget-title alt-font text-small text-medium-gray text-uppercase margin-15px-bottom font-weight-600">Subscribe Newsletter</div>
-                    <p class="text-small width-90 sm-width-100">{{ config('settings.newsletter') }}</p>
+                    <p class="text-small width-90 sm-width-100">{{ $newsletter }}</p>
                     <form id="subscribenewsletterform" action="javascript:void(0)" method="post">
                         <div class="position-relative newsletter width-95">
                             <div id="success-subscribe-newsletter" class="mx-0"></div>
@@ -92,8 +92,8 @@
         <div class="footer-bottom border-top border-color-medium-dark-gray padding-30px-top">
             <div class="row">
                 <!-- start copyright -->
-                <div class="col-lg-6 col-md-6 text-small text-md-left text-center">{{ config('settings.copyright') }}</div>
-                <div class="col-lg-6 col-md-6 text-small text-md-right text-center">&COPY;2020-{{ date('Y') }} {{ config('settings.copyright') }}</div>
+                <div class="col-lg-6 col-md-6 text-small text-md-left text-center">{{ $copyright }}</div>
+                <div class="col-lg-6 col-md-6 text-small text-md-right text-center">&COPY;2020-{{ date('Y') }} {{ $copyright }}</div>
                 <!-- end copyright -->
             </div>
         </div>

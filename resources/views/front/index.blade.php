@@ -1,4 +1,7 @@
 @extends('layouts.front.index')
+@section('title')
+    {{ $site_name }}
+@endsection
 @section('content')
 {{-- @isset($getProjects)
     @foreach ($getProjects as $project)

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Secure User Controlller
      *
      * @return \Illuminate\Http\Response
      */

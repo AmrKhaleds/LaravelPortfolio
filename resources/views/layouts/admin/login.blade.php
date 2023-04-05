@@ -12,6 +12,10 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/admin/images/ico/favicon.ico') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
         rel="stylesheet">
+        {{-- Font Awoesome --}}
+        <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        {{-- EndFont Awoesome --}}
         <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
         rel="stylesheet">
         <!-- BEGIN VENDOR CSS-->
@@ -33,6 +37,7 @@
     </head>
     <body class="vertical-layout vertical-menu 1-column   menu-expanded blank-page blank-page" data-open="click" data-menu="vertical-menu" data-col="1-column">
 
+        @include('admin.includes.alerts.errors')
         @yield('content')
         
         <!-- BEGIN VENDOR JS-->
@@ -50,6 +55,13 @@
         <!-- BEGIN PAGE LEVEL JS-->
         <script src="{{ asset('assets/admin/js/scripts/forms/form-login-register.js') }}" type="text/javascript"></script>
         <!-- END PAGE LEVEL JS-->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(() => {
+                    $('.toast').fadeOut();
+                }, 5000);
+            });
+        </script>
     </body>
 </html>
 

@@ -50,4 +50,14 @@ class User extends Authenticatable
     public function getActive(){
         return $this->status == 1 ? 'On' : 'Off';
     }
+    /**
+     * Make any new registration with this credintales 
+     */
+    public static function create(array $attributes = [])
+    {
+        // $attributes['status'] = "0";
+        // $attributes['role'] = ['User'];
+
+        return static::query()->create($attributes);
+    }
 }

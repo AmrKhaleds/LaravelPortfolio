@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Secure Role Controller
      *
      * @return \Illuminate\Http\Response
      */

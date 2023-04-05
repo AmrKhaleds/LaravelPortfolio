@@ -12,13 +12,23 @@
                         </span>
                 </a>
         </li>
+        {{-- Calendar --}}
+        <li class="nav-item">
+                <!-- The current user can update the post... -->
+                {{-- @can('calendar') --}}
+                <a class="{{ Route::currentRouteNamed('admin.calendar') ? 'active' : '' }}" href="{{ route('admin.calendar') }}">
+                        <i class="la la-calendar"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Calendar') }}</span>
+                </a>
+                {{-- @endcan --}}
+        </li>
         {{-- Projects --}}
         <li class=" nav-item">
                 @can('project-list')
                 <a href="">
-                        <i class="la la-briefcase"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Projects') }}</span>
-                        <span class="badge badge badge-info badge-pill float-right mr-2">{{ App\Models\Project::count() }}</span>
+                        <i class="la la-book"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('My Portfolio') }}</span>
+                        <span class="badge badge badge-success badge-glow badge-pill float-right mr-2">{{ App\Models\Project::count() }}</span>
                 </a>
                 <ul class="menu-content">
                         @can('project-list')
@@ -34,23 +44,54 @@
                 </ul>
                 @endcan
         </li>
-        {{-- Settings --}}
-        <li class="nav-item">
-                <!-- The current user can update the post... -->
-                @can('settings-list')
+        {{-- Projects --}}
+        <li class=" nav-item">
+                @can('project-list')
                 <a href="">
-                        <i class="ft-settings icon-left"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Settings') }}</span>
+                        <i class="la la-briefcase"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Client Projects') }}</span>
+                        <span class="badge badge badge-success badge-glow badge-pill float-right mr-2">{{ App\Models\ClientProject::count() }}</span>
                 </a>
                 <ul class="menu-content">
-                        @can('settings-edit')
-                        <li class="{{ Route::currentRouteNamed('frontSettings') ? 'active' : '' }}">
-                                <a href="{{ route('frontSettings') }}" class="menu-item" href="dashboard-ecommerce.html" data-i18n="nav.dash.websettings">Website Settings</a>
-                        </li>
-                        <li class="{{ Route::currentRouteNamed('dashboardSettings') ? 'active' : '' }}">
-                                <a href="{{ route('dashboardSettings') }}" class="menu-item" href="dashboard-crypto.html" data-i18n="nav.dash.adminsettings">Dashboard Settings</a>
+                        @can('project-list')
+                        <li class="{{ Route::currentRouteNamed('client-projects.index') ? 'active' : '' }}">
+                                <a href="{{ route('client-projects.index') }}" class="menu-item" href="dashboard-ecommerce.html" data-i18n="nav.dash.projects">All Projects</a>
                         </li>
                         @endcan
+                        @can('project-create')
+                        <li class="{{ Route::currentRouteNamed('client-projects.create') ? 'active' : '' }}">
+                                <a href="{{ route('client-projects.create') }}" class="menu-item" href="dashboard-crypto.html" data-i18n="nav.dash.addnewproject">Add New Project</a>
+                        </li>
+                        @endcan
+                </ul>
+                @endcan
+        </li>
+        {{-- Clients --}}
+        <li class="nav-item">
+                @can('user-list')
+                <a href="">
+                        <i class="la la-users"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Clients') }}</span>
+                        <span class="badge badge badge-pill badge-glow badge-warning float-right mr-2">{{ App\Models\Client::count() }}</span>
+                </a>
+                <ul class="menu-content">
+                        @can('user-list')
+                        <li class="{{ Route::currentRouteNamed('clients.index') ? 'active' : '' }}">
+                                <a href="{{ route('clients.index') }}" class="menu-item" href="dashboard-ecommerce.html" data-i18n="nav.dash.websettings">All Clients</a>
+                        </li>
+                        @endcan
+                        @can('user-create')
+                        <li class="{{ Route::currentRouteNamed('clients.create') ? 'active' : '' }}">
+                                <a href="{{ route('clients.create') }}" class="menu-item" href="dashboard-crypto.html" data-i18n="nav.dash.adminsettings">Add Client</a>
+                        </li>
+                        @endcan
+                        {{-- @can('deleted') --}}
+                        <li class="{{ Route::currentRouteNamed('client.trashed') ? 'active' : '' }}">
+                                <a href="{{ route('client.trashed') }}" class="menu-item" href="dashboard-crypto.html" data-i18n="nav.dash.adminsettings">Deleted Client</a>
+                                <span style="position: absolute;right: 20px;top: 10px;" class="badge badge badge-pill badge-glow badge-danger float-right mr-2">{{ App\Models\Client::onlyTrashed()->count() }}</span>
+                        </li>
+
+                        {{-- @endcan --}}
                 </ul>
                 @endcan
         </li>
@@ -60,7 +101,7 @@
                 <a href="">
                         <i class="la la-user"></i>
                         <span class="menu-title" data-i18n="nav.dash.main">{{ __('Users') }}</span>
-                        <span class="badge badge badge-info badge-pill float-right mr-2">{{ App\Models\User::count() }}</span>
+                        <span class="badge badge badge-info badge-glow badge-pill float-right mr-2">{{ App\Models\User::count() }}</span>
                 </a>
                 <ul class="menu-content">
                         @can('user-list')
@@ -80,7 +121,7 @@
         <li class="nav-item">
                 @can('role-list')
                         <a href="">
-                                <i class="la la-user"></i>
+                                <i class="la la-key"></i>
                                 <span class="menu-title" data-i18n="nav.dash.main">{{ __('Role') }}</span>
                         </a>
                         <ul class="menu-content">
@@ -95,6 +136,16 @@
                                 </li>
                                 @endcan
                         </ul>
+                @endcan
+        </li>
+        {{-- Settings --}}
+        <li class="nav-item">
+                <!-- The current user can update the post... -->
+                @can('settings-list')
+                <a class="{{ Route::currentRouteNamed('settings.index') ? 'active' : '' }}" href="{{ route('settings.index') }}">
+                        <i class="ft-settings icon-left"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Settings') }}</span>
+                </a>
                 @endcan
         </li>
 </div>

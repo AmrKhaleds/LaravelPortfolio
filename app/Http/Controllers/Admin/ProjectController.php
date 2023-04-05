@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Secure Project Controller
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,13 +51,10 @@ class ProjectController extends Controller
     {
         // Get the uploaded image
         $image = $request->file($field);
-
         // Generate a unique filename for the image
         $filename = time() . '_' . $image->getClientOriginalName();
-
         // Store the image in the storage/app/public/images directory
         $image->storeAs('public/images', $filename);
-
         // Return the path to the stored image
         return $filename;
     }

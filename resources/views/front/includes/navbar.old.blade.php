@@ -5,7 +5,7 @@
         <div class="container-fluid nav-header-container">
             <!-- start logo -->
             <div class="col-auto col-md-2 pl-0">
-                <a href="{{ url('/') }}" title="Pofo" class="logo"><img src="{{ asset('assets/front/images/logo/' . config("settings.logo_path_black")) }}" data-rjs="{{ asset('assets/front/images/logo@2x.png') }}" class="logo-dark default" alt="Pofo"><img src="{{ asset('assets/front/images/logo/' . config("settings.logo_path")) }}" data-rjs="{{ asset('assets/front/images/logo-full-white@2x.png') }}" alt="Pofo" class="logo-light"></a>
+                <a href="{{ url('/') }}" title="AddYou" class="logo"><img src="{{asset('storage/images/logo/' . $white_logo)}}" data-rjs="{{ asset('assets/front/images/logo@2x.png') }}" class="logo-dark default" alt="AddYou"><img src="{{asset('storage/images/logo/' . $black_logo)}}" data-rjs="{{ asset('assets/front/images/logo-full-white@2x.png') }}" alt="AddYou" class="logo-light"></a>
             </div>
             <!-- end logo -->
             <div class="col accordion-menu pr-0 pr-lg-3">
@@ -533,9 +533,9 @@
                     </form>
                 </div>
                 <div class="header-social-icon d-none d-md-inline-block">
-                    <a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                    <a href="https://twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://dribbble.com/" title="Dribbble" target="_blank"><i class="fab fa-dribbble"></i></a>                          
+                    <a href="{{ route('client.login') }}" target="_blank">Login</a>/
+                    <a href="{{ route('client.register') }}" target="_blank">Register</a>
+                    {{-- <a href="https://dribbble.com/" title="Dribbble" target="_blank"><i class="fab fa-dribbble"></i></a>                           --}}
                 </div>
             </div>
         </div>
