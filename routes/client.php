@@ -5,6 +5,7 @@ use App\Http\Controllers\Client\Auth\LogoutController;
 use App\Http\Controllers\Client\Auth\RegistrationController;
 use App\Http\Controllers\Client\ClientCalendarController;
 use App\Http\Controllers\Client\ClientDashboardController;
+use App\Http\Controllers\Client\ProjectController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;    
 
@@ -32,6 +33,9 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function(){
         // Calendar
         Route::get('calendar', [ClientCalendarController::class, 'index'])->name('calendar');
         Route::post('calendar/action', [ClientCalendarController::class, 'calendarEvents'])->name('calendar.action');
+        // Projects
+        Route::get('my-projects', [ProjectController::class, 'index'])->name('project');
+        Route::get('my-projects/{id}', [ProjectController::class, 'show'])->name('project.show');
     });
 });
 // Route::get('client-register', [RegistrationController::class, 'showRegistrationForm'])->name('client.regiser.form');

@@ -46,9 +46,11 @@ class Client extends Authenticatable
     public function ClientCalendar(){
         return $this->hasOne(ClientCalendar::class);
     }
-    // public function ClientProject(){
-    //     return $this->hasMany(ClientProject::class);
-    // }
+    
+    public function ClientProject(){
+        return $this->hasMany(ClientProject::class);
+    }
+
     public function client_project_photos(){
         return $this->hasMany(ClientProjectPhotos::class);
     }
