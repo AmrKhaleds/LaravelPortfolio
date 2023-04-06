@@ -42,7 +42,7 @@
     </head>
     <body class="vertical-layout vertical-menu 2-columns
     @if(Request::is('assets/users/tickets/reply*')) chat-application 
-    @endif menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+    @endif menu-expanded fixed-navbar " data-open="click" data-menu="vertical-menu" data-col="2-columns">
         <!-- fixed-top-->
         @include ('client.includes.header')
         @include ('client.includes.sidebar')
@@ -83,6 +83,23 @@
                     $('.toast').fadeOut();
                 }, 3000);
             });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $('.menu-toggle').click(function() {
+                event.stopPropagation();
+                $('.menu-toggle').toggleClass('is-active');
+                $('.vertical-layout').toggleClass('menu-open');
+            });
+            $(document).click(function(event) {
+                var clickover = $(event.target);
+                var opened = $(".menu-toggle").hasClass("is-active");
+                if (opened == true && !clickover.hasClass("main-menu-content")) {
+                    $('.vertical-layout').toggleClass('menu-open');
+                    $('.menu-toggle').toggleClass('is-active');
+                }
+            });
+        });
         </script>
         <!-- Custom Script -->
         @yield('custom_js')

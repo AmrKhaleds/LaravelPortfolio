@@ -80,6 +80,23 @@
                 }, 3000);
             });
         </script>
+        <script>
+            $(document).ready(function() {
+                $('.menu-toggle').click(function() {
+                    event.stopPropagation();
+                    $('.menu-toggle').toggleClass('is-active');
+                    $('.vertical-layout').toggleClass('menu-open');
+                });
+                $(document).click(function(event) {
+                    var clickover = $(event.target);
+                    var opened = $(".menu-toggle").hasClass("is-active");
+                    if (opened == true && !clickover.hasClass("main-menu-content")) {
+                        $('.vertical-layout').toggleClass('menu-open');
+                        $('.menu-toggle').toggleClass('is-active');
+                    }
+                });
+            });
+            </script>
         <!-- Custom Script -->
         @yield('custom_js')
         <!-- End Custom Script -->
