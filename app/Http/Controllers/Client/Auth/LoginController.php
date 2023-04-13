@@ -25,7 +25,9 @@ class LoginController extends Controller
      */
     public function login(Request $request){
         $requestData = $request->only('username','password');
-        if (Auth::guard('clients')->attempt($requestData)) {
+        $remember = $request->has('remember');
+
+        if (Auth::guard('clients')->attempt($requestData, $remember)) {
             // Authentication passed...
             return redirect()->intended('/client/dashboard');
         }

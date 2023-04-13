@@ -62,7 +62,15 @@
                                                             <td>{{ $project->project_name }}</td>
                                                             <td>{{ $project->start_at }}</td>
                                                             <td>{{ $project->end_at }}</td>
-                                                            <td>{{ $project->progress }}</td>
+                                                            <td>
+                                                                @if($project->progress == 'complete')
+                                                                    <span class="badge badge badge-pill badge-success badge-glow  mr-2">{{$project->progress}}</span>
+                                                                @elseif($project->progress == 'on progress')
+                                                                    <span class="badge badge badge-pill badge-info badge-glow mr-2">{{$project->progress}}</span>
+                                                                @else
+                                                                    <span class="badge badge badge-pill badge-danger badge-glow mr-2">{{$project->progress}}</span>
+                                                                @endif
+                                                            </td>
                                                             <td>
                                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                                     <a href="{{ route('client.project.show', $project->id) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">

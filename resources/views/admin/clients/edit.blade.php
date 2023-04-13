@@ -86,7 +86,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="project_type">Project Type</label>
-                                                            {{in_array("Photo", $client->project_type)}}
+                                                            {{-- {{in_array("Photo", $client->project_type)}} --}}
                                                             <select name="project_type[]" id="project_type" class="form-control" multiple>
                                                                     <option disabled>Select Value</option>
                                                                     <option value="Photo" {{ in_array('Photo', $client->project_type) ? 'selected' : '' }}>Photo</option>

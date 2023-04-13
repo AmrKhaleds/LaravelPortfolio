@@ -60,7 +60,8 @@ class ClientProjectController extends Controller
             if ($request->hasFile('photo_name')) {
                 foreach ($request->file('photo_name') as $image) {
                     $photoName = time() . '_' . $image->getClientOriginalName();
-                    $image->storeAs('public/clients/photos/' . $clientName->username , $photoName);
+                    // dd('public/clients/photos/' . $clientName->username . '/' . $clientProject->project_name);
+                    $image->storeAs('public/clients/photos/' . $clientName->username . '/' . $clientProject->project_name , $photoName);
                     ClientProjectPhotos::create([
                         'project_id' => $clientProject->id,
                         'photo_name' => $photoName
@@ -71,7 +72,7 @@ class ClientProjectController extends Controller
             if ($request->hasFile('video_name')) {
                 foreach($request->file('video_name') as $video){
                     $videoName = date('Y-m-d') . '_' . $video->getClientOriginalName();
-                    $video->storeAs('public/clients/videos/' . $clientName->username , $videoName);
+                    $video->storeAs('public/clients/videos/' . $clientName->username . '/' . $clientProject->project_name , $videoName);
                     ClientProjectVideos::create([
                         'project_id' => $clientProject->id,
                         'video_name' => $videoName
@@ -113,6 +114,14 @@ class ClientProjectController extends Controller
     public function destroy(string $id)
     {
         $project = ClientProject::find($id);
+        $clientCalendar = ClientCalendar::where('client_id', $project->client->id)
+                                        ->whereDate('event_start', $project->start_at)
+                                        ->whereDate('event_end', $project->end_at)
+                                        ->first();
+        // dd($clientCalendar);
+        if($clientCalendar){
+            $clientCalendar->delete();
+        }
         if($project->delete()){
             return redirect()->route('client-projects.index')->with(['success' => 'Project Deleted Successfully']);
         }else{

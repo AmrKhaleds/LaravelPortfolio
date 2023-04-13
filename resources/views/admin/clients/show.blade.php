@@ -33,7 +33,7 @@
                                 <div class="media profil-cover-details w-100">
                                     <div class="media-left pl-2 pt-2">
                                         <a href="#" class="profile-image">
-                                            <img src="{{ asset('storage/images/' . $client->avatar) }}"
+                                            <img src="{{ asset('storage/clients/avatars/' . $client->avatar) }}"
                                                 class="rounded-circle img-border height-100" alt="Card image">
                                         </a>
                                     </div>

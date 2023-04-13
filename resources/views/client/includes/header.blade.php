@@ -34,10 +34,10 @@
                                 <span class="user-name text-bold-700">Hello, {{ auth('clients')->user()->name }}</span>
                             </span>
                             <span class="avatar avatar-online">
-                                <img style="height: 35px;" src="{{ asset('storage/images/defaultAvatar.png') }}"
+                                <img style="height: 35px;" src="{{ asset('storage/clients/avatars/' . auth('clients')->user()->avatar) }}"
                                     alt="avatar"><i></i></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href=""><i
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="{{ route('client.my-profile.index') }}"><i
                                     class="ft-user"></i>Edit Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('client.logout') }}"

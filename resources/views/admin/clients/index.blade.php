@@ -64,7 +64,7 @@
                                                     @foreach ($clients as $client)
                                                         <tr>
                                                             <td>
-                                                                <img style="width: 100px;" src="{{asset('storage/images/' . $client->avatar)}}" alt="">
+                                                                <img style="width: 100px;" src="{{asset('storage/clients/avatars/' . $client->avatar)}}" alt="">
                                                             </td>
                                                             <td>{{ $client->name }}</td>
                                                             <td>{{ $client->username }}</td>

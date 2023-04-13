@@ -22,7 +22,7 @@ class ClientProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'project_name' => 'required|string|max:50',
+            'project_name' => 'required|string|unique:client_projects|max:50',
             'client_id' => 'required|integer|exists:clients,id',
             'start_at' => 'required|date|after_or_equal:today',
             'end_at' => 'required|date|after:start_at',

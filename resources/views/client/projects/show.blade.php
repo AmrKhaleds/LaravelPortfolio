@@ -2,7 +2,8 @@
 @section('title', 'Project Summary')
 @section('vendor_css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/gallery/photo-swipe/photoswipe.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/gallery/photo-swipe/default-skin/default-skin.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/admin/vendors/js/gallery/photo-swipe/default-skin/default-skin.css') }}">
 @endsection
 @section('page_level_css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/pages/gallery.css') }}">
@@ -38,7 +39,7 @@
                                     <div class="heading-elements">
                                         @isset($project->client->project_type)
                                             @foreach ($project->client->project_type as $type)
-                                                <span class="badge badge-default badge-warning">{{$type}}</span>
+                                                <span class="badge badge-default badge-warning">{{ $type }}</span>
                                                 {{-- <span class="badge badge-default badge-success">New</span>
                                                 <span class="badge badge-default badge-info">iOS</span> --}}
                                             @endforeach
@@ -52,10 +53,10 @@
                                             <span class="text-muted">{{ $project->client->name }}</span>
                                         </li>
                                         <li>Start:
-                                            <span class="text-muted">{{ $project->start_at }}</span>
+                                            <span class="text-danger">{{ $project->start_at }}</span>
                                         </li>
                                         <li>Due on:
-                                            <span class="text-muted">{{ $project->end_at }}</span>
+                                            <span class="text-danger">{{ $project->end_at }}</span>
                                         </li>
                                         <li><a href="#" class="text-muted" data-toggle="tooltip"
                                                 data-placement="bottom" title=""
@@ -79,7 +80,18 @@
                                 </div>
                                 <div class="project-info-count col-lg-4 col-md-12">
                                     <div class="project-info-icon">
-                                        <h5>{{ $project->progress }}</h5>
+                                        <h5>
+                                            @if ($project->progress == 'complete')
+                                                <span
+                                                    class="badge badge badge-pill badge-success badge-glow">{{ $project->progress }}</span>
+                                            @elseif($project->progress == 'on progress')
+                                                <span
+                                                    class="badge badge badge-pill badge-info badge-glow">{{ $project->progress }}</span>
+                                            @else
+                                                <span
+                                                    class="badge badge badge-pill badge-danger badge-glow">{{ $project->progress }}</span>
+                                            @endif
+                                        </h5>
                                         <div class="project-info-sub-icon">
                                             <span class="la la-calendar-check-o"></span>
                                         </div>
@@ -100,64 +112,44 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- project-info -->
-                            {{-- <div class="card-body">
-                                <div class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
-                                    <span>Egal's Eye View Of Project Status</span>
-                                </div>
-                                <div class="row py-2">
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="insights px-2">
-                                            <div>
-                                                <span class="text-info h3">82%</span>
-                                                <span class="float-right">Tasks</span>
-                                            </div>
-                                            <div class="progress progress-md mt-1 mb-0">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 82%"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            @isset($project->external_photos_link)
+
+                                <div class="card-body">
+                                    <div class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
+                                        <span>External Links</span>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="insights px-2">
+                                                <div>
+                                                    <span class="text-dark h3">External Photos Link : </span>
+                                                </div>
+                                                @isset($project->external_photos_link)
+                                                    <a href="{{ $project->external_photos_link }}" target="_blanck"
+                                                        class="text-blue">{{ $project->external_photos_link }}</a>
+                                                @else
+                                                    <span class="text-danger">Null</span>
+                                                @endisset
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="insights px-2">
-                                            <div>
-                                                <span class="text-success h3">78%</span>
-                                                <span class="float-right">TaskLists</span>
-                                            </div>
-                                            <div class="progress progress-md mt-1 mb-0">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 78%"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row py-2">
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="insights px-2">
-                                            <div>
-                                                <span class="text-warning h3">68%</span>
-                                                <span class="float-right">Milestones</span>
-                                            </div>
-                                            <div class="progress progress-md mt-1 mb-0">
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 68%"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="insights px-2">
-                                            <div>
-                                                <span class="text-danger h3">62%</span>
-                                                <span class="float-right">Bugs</span>
-                                            </div>
-                                            <div class="progress progress-md mt-1 mb-0">
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 62%"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="insights px-2">
+                                                <div>
+                                                    <span class="text-dark h3">External Videos Link : </span>
+                                                </div>
+                                                @isset($project->external_videos_link)
+                                                    <a href="{{ $project->external_videos_link }}" target="_blanck"
+                                                        class="text-blue">{{ $project->external_videos_link }}</a>
+                                                @else
+                                                    <span class="text-danger">Null</span>
+                                                @endisset
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            @endisset
                         </div>
                     </div>
                 </section>
@@ -178,8 +170,12 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <div class="card-text">
+                            <div class="card-text" style="display: flex; justify-content: space-between;">
                                 <h5>All Project Photos</h5>
+
+                                <a class="btn btn-outline-primary mb-1"
+                                    href="{{ route('client.download.photos', ['client' => $project->client->username, 'project' => $project->project_name]) }}">Download
+                                    All Images</a>
                             </div>
                         </div>
                         <div class="card-body  my-gallery" itemscope="" itemtype="http://schema.org/ImageGallery"
@@ -189,10 +185,10 @@
                                 @forelse ($projectPhotos as $photo)
                                     <figure class="col-lg-3 col-md-6 col-12" itemprop="associatedMedia" itemscope=""
                                         itemtype="http://schema.org/ImageObject">
-                                        <a href="{{ asset('storage/clients/photos/' . $clientUsername . '/' . $photo->photo_name) }}"
+                                        <a href="{{ asset('storage/clients/photos/' . $clientUsername . '/' . $project->project_name . '/' . $photo->photo_name) }}"
                                             itemprop="contentUrl" data-size="2000x2000">
                                             <img class="img-thumbnail img-fluid"
-                                                src="{{ asset('storage/clients/photos/' . $clientUsername . '/' . $photo->photo_name) }}"
+                                                src="{{ asset('storage/clients/photos/' . $clientUsername . '/' . $project->project_name . '/' . $photo->photo_name) }}"
                                                 itemprop="thumbnail" alt="{{ $photo->photo_name }}">
                                         </a>
                                     </figure>
@@ -207,13 +203,13 @@
                         <!-- Root element of PhotoSwipe. Must have class pswp. -->
                         <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
                             <!-- Background of PhotoSwipe.
-                           It's a separate element as animating opacity is faster than rgba(). -->
+                               It's a separate element as animating opacity is faster than rgba(). -->
                             <div class="pswp__bg"></div>
                             <!-- Slides wrapper with overflow:hidden. -->
                             <div class="pswp__scroll-wrap">
                                 <!-- Container that holds slides.
-                              PhotoSwipe keeps only 3 of them in the DOM to save memory.
-                              Don't modify these 3 pswp__item elements, data is added later on. -->
+                                  PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                                  Don't modify these 3 pswp__item elements, data is added later on. -->
                                 <div class="pswp__container">
                                     <div class="pswp__item"></div>
                                     <div class="pswp__item"></div>
@@ -255,6 +251,48 @@
                     <!--/ PhotoSwipe -->
                 </section>
                 <!-- ========== End image Gallery ========== -->
+                <!-- ========== Start Vedio Gallery ========== -->
+                <section id="video-gallery" class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Video gallery</h4>
+                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="card-text">
+                                <p>This section contain responsive embedded video gallery with grid
+                                    4-2-1 columns This demo contain vimeo and youtube embedded videos.</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @forelse($projectVideos as $video)
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="embed-responsive embed-responsive-item embed-responsive-16by9">
+                                            {{-- <iframe class="img-thumbnail"
+                                                src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" width="640"
+                                                height="360"></iframe> --}}
+                                                <video class="img-thumbnail" controls preload="none">
+                                                    <source src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" type="video/mp4">
+                                                </video>
+                                        </div>
+                                    </div>
+                                @empty
+                                    There is no videos For this project
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- ========== End Vedio Gallery ========== -->
             </div>
         </div>
     </div>
@@ -269,7 +307,8 @@
         type="text/javascript"></script>
 @endsection
 @section('page_level_js')
-    <script src="{{ asset('assets/admin/js/scripts/gallery/photo-swipe/photoswipe-script.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/admin/js/scripts/gallery/photo-swipe/photoswipe-script.js') }}" type="text/javascript">
+    </script>
     {{-- <script src="{{ asset('assets/admin/js/scripts/pages/project-summary-task.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admin/js/scripts/pages/project-summary-bug.js') }}" type="text/javascript"></script> --}}
 @endsection

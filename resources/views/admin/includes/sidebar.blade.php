@@ -12,16 +12,6 @@
                         </span>
                 </a>
         </li>
-        {{-- Calendar --}}
-        <li class="nav-item">
-                <!-- The current user can update the post... -->
-                {{-- @can('calendar') --}}
-                <a class="{{ Route::currentRouteNamed('admin.calendar') ? 'active' : '' }}" href="{{ route('admin.calendar') }}">
-                        <i class="la la-calendar"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Calendar') }}</span>
-                </a>
-                {{-- @endcan --}}
-        </li>
         {{-- Projects --}}
         <li class=" nav-item">
                 @can('project-list')

@@ -1,15 +1,18 @@
 <?php
-
-use App\Http\Controllers\Admin\CalendarConroller;
-use App\Http\Controllers\Admin\ClientController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\ClientProjectController;
-use App\Http\Controllers\Front\ProjectController as FrontProjectController;
-use App\Http\Controllers\Front\WebsiteController;
+use App\Http\Controllers\Admin\{
+    CalendarConroller,
+    ClientController,
+    DashboardController,
+    ProjectController,
+    SettingsController,
+    UserController,
+    RoleController,
+    ClientProjectController
+};
+use App\Http\Controllers\Front\{
+    ProjectController as FrontProjectController,
+    WebsiteController
+};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;    
 
@@ -32,7 +35,8 @@ Auth::routes(['register' => false, 'reset' => false]);
 // Admin Dashboard
 Route::group(['prefix' => 'dashboard','middleware' => ['auth', 'checkStatus']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('project', ProjectController::class); // admin
+    // Projects
+    Route::resource('project', ProjectController::class); 
     // Settings
     Route::resource('settings', SettingsController::class);
     // Users
@@ -41,12 +45,10 @@ Route::group(['prefix' => 'dashboard','middleware' => ['auth', 'checkStatus']], 
     Route::resource('roles', RoleController::class);
     // Clients
     Route::resource('clients', ClientController::class);
+    // ClientProjects
+    Route::resource('client-projects', ClientProjectController::class);
     Route::get('trashed-clients', [ClientController::class, 'onlyTrashed'])->name('client.trashed');
     Route::post('trashed-clients/restore/{username}', [ClientController::class, 'restoreTrashed'])->name('client.trashed.restore');
     Route::post('clients/calendar/action/{id}', [ClientController::class, 'calendarEvents'])->name('calendar.action');
-    // Caledar
-    Route::get('caleder', [CalendarConroller::class, 'index'])->name('admin.calendar');
-    // ClientProjects
-    Route::resource('client-projects', ClientProjectController::class);
 
 });

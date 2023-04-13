@@ -41,6 +41,39 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-xl-4 col-12">
+                        <a href="{{ route('client.project') }}">
+                            <div class="card crypto-card-3 pull-up">
+                                <div class="card-content">
+                                    <div class="card-body pb-0">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <h1><i class="cc GDC danger font-large-2" title="ICN"></i>
+                                                </h1>
+                                            </div>
+                                            <div class="col-6 pl-2">
+                                                <h2>My Storage Size</h2>
+                                                {{-- <h6 class="text-muted"></h6> --}}
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <span class="badge badge badge-danger badge-pill float-right mr-2">
+                                                    @isset($clientProjects)
+                                                        {{ count($clientProjects) }}
+                                                    @endisset
+                                                </span>
+                                                {{-- <h4>{{App\Models\Project::count()}}</h4> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <canvas id="eth-chartjs" class="height-75 chartjs-render-monitor" width="935" height="93" style="display: block; height: 75px; width: 748px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

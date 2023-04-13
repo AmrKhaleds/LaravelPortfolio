@@ -31,7 +31,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'DESC')->paginate(5);
+        $data = User::orderBy('id', 'DESC')->paginate(10);
         return view('admin.users.index', compact('data'))->with('i', ($request->input('page', -1)) * 5);
     }
 
@@ -131,3 +131,4 @@ class UserController extends Controller
             ->with('success', 'User deleted successfully');
     }
 }
+

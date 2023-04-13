@@ -54,6 +54,19 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group has-icon-left">
+                                                        <input class="chk-remember" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="remember">
+                                                            {{ __('Remember Me') }}
+                                                        </label>
+                                                        @error('remember')
+                                                            <span id="remember_error" class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <button type="submit" class="btn btn-info btn-lg btn-block"><i
                                                     class="ft-unlock"></i> Login</button>
                                         </form>

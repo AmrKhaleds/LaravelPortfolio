@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('client_projects', function (Blueprint $table) {
             $table->id();
-            $table->string('project_name');
+            $table->string('project_name')->unique();
             $table->unsignedBigInteger('client_id');
             $table->date('start_at');
             $table->date('end_at');

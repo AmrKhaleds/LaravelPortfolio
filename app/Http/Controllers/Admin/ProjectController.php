@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
+use App\Models\ClientCalendar;
 use App\Models\Project;
 
 use Illuminate\Http\Request;
@@ -130,8 +131,8 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        $projectId = Project::find($id);
-        $projectId->delete();
+        $project = Project::find($id);
+        $project->delete();
         return redirect()->route('project.index');
     }
 }

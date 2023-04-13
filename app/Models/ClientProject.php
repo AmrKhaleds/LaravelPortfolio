@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ClientProject extends Model
 {
@@ -32,20 +33,23 @@ class ClientProject extends Model
         static::deleting(function($project){
             $clientUsername = Client::find($project->client_id)->username;
 
-            $photoDir = 'public/clients/photos/' . $clientUsername . '/';
-            $videoDir = 'public/clients/videos/' . $clientUsername . '/';
+            $photoDir = 'public/clients/photos/' . $clientUsername . '/' . $project->project_name . '/';
+            $videoDir = 'public/clients/videos/' . $clientUsername . '/' . $project->project_name . '/';
             // Delete all associated photos and their photos files
             $project->client_project_photos->each(function($photo) use ($photoDir){
                 $imagePath = storage_path('app/' . $photoDir . $photo->photo_name);
-                unlink($imagePath);
-                $photo->delete();
+                if(Storage::exists($imagePath)){
+                    unlink($imagePath);
+                    $photo->delete();
+                }
             });
             // Delete all associated videos and their video files
             $project->client_project_videos->each(function($video) use ($videoDir){
                 $videoDir = storage_path('app/' . $videoDir . $video->video_name);
-                // dd($videoDir);
-                unlink($videoDir);
-                $video->delete();
+                if(Storage::exists($video)){
+                    unlink($videoDir);
+                    $video->delete();
+                }
             });
         });
     }
