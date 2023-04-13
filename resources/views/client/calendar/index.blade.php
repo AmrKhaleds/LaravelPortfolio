@@ -15,6 +15,9 @@
             font-size: 15px;
             font-weight: bold;
         }
+        .fc-scroller.fc-day-grid-container {
+            height: 100% !important;
+        }
     </style>
 @endsection
 
