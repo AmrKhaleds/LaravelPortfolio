@@ -42,7 +42,7 @@
                 {{-- Client Support --}}
                 <li class="nav-item">
                         <!-- The current user can update the post... -->
-                        <a class="{{ Route::currentRouteNamed('') ? 'active' : '' }}" href="">
+                        <a class="{{ Route::currentRouteNamed('client.support') ? 'active' : '' }}" href="{{ route('client.support') }}">
                                 <i class="la la-support"></i>
                                 <span class="menu-title" data-i18n="nav.dash.main">{{ __('Custmor Support') }}</span>
                         </a>

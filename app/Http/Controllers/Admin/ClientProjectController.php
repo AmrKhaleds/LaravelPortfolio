@@ -11,6 +11,7 @@ use App\Models\ClientProjectPhotos;
 use App\Models\ClientProjectVideos;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClientProjectController extends Controller
 {
@@ -60,12 +61,14 @@ class ClientProjectController extends Controller
             if ($request->hasFile('photo_name')) {
                 foreach ($request->file('photo_name') as $image) {
                     $photoName = time() . '_' . $image->getClientOriginalName();
-                    // dd('public/clients/photos/' . $clientName->username . '/' . $clientProject->project_name);
-                    $image->storeAs('public/clients/photos/' . $clientName->username . '/' . $clientProject->project_name , $photoName);
+                    $imagePath = 'photos/' . $clientName->username . '/' . $clientProject->project_name;
+                    // dd($imagePath);
+                    $image->storeAs('public/clients/photos/' . $clientName->username . '/' . $clientProject->project_name, $photoName);
                     ClientProjectPhotos::create([
                         'project_id' => $clientProject->id,
                         'photo_name' => $photoName
                     ]);
+
                 }
             }
             // check if videos field input are exist and then loop throw videos then sore in database
@@ -90,6 +93,16 @@ class ClientProjectController extends Controller
      */
     public function show(string $id)
     {
+        $project = ClientProject::where('id', $id)->first();
+        $clientUsername = Client::find($project->client_id)->username;
+        $projectPhotos = $project->client_project_photos;
+        $projectVideos = $project->client_project_videos;
+        $projectVideos = $project->client_project_videos;
+        $photoDir = 'public/clients/photos/' . $clientUsername . '/';
+        $clientDir = $project->client->username . '/' . $project->project_name;
+        // dd($clientDir);
+        
+        return view('admin.client-projects.show', compact('projectPhotos', 'projectVideos', 'projectVideos', 'clientUsername', 'project', 'clientDir'));
     }
 
     /**

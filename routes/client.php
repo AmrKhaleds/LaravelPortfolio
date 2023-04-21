@@ -6,6 +6,8 @@ use App\Http\Controllers\Client\Auth\RegistrationController;
 use App\Http\Controllers\Client\ClientCalendarController;
 use App\Http\Controllers\Client\ClientDashboardController;
 use App\Http\Controllers\Client\ClientProfileController;
+use App\Http\Controllers\Client\CustomerSupport;
+use App\Http\Controllers\Client\CustomerSupportController;
 use App\Http\Controllers\Client\ProjectController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;    
@@ -41,6 +43,11 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function(){
         Route::resource('my-profile', ClientProfileController::class);
         // Download Files
         Route::get('dowonload/{client}/{project}', [ProjectController::class, 'downloadPhotos'])->name('download.photos');
+        // Customer Support 
+        Route::get('support', [CustomerSupportController::class, 'index'])->name('support');
+        Route::POST('support', [CustomerSupportController::class, 'store'])->name('support.store');
+        Route::get('support/{id}', [CustomerSupportController::class, 'show'])->name('support.show');
+        Route::delete('support/{id}', [CustomerSupportController::class, 'destroy'])->name('support.destroy');
     });
 });
 // Route::get('client-register', [RegistrationController::class, 'showRegistrationForm'])->name('client.regiser.form');

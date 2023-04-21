@@ -7,7 +7,9 @@ use App\Http\Controllers\Admin\{
     SettingsController,
     UserController,
     RoleController,
-    ClientProjectController
+    ClientProjectController,
+    CustomerSupportController,
+    ProfileController
 };
 use App\Http\Controllers\Front\{
     ProjectController as FrontProjectController,
@@ -47,8 +49,15 @@ Route::group(['prefix' => 'dashboard','middleware' => ['auth', 'checkStatus']], 
     Route::resource('clients', ClientController::class);
     // ClientProjects
     Route::resource('client-projects', ClientProjectController::class);
+    // Trashed Clients
     Route::get('trashed-clients', [ClientController::class, 'onlyTrashed'])->name('client.trashed');
     Route::post('trashed-clients/restore/{username}', [ClientController::class, 'restoreTrashed'])->name('client.trashed.restore');
+    // Calendar Events
     Route::post('clients/calendar/action/{id}', [ClientController::class, 'calendarEvents'])->name('calendar.action');
-
+    // Customer Support
+    Route::get('customer-support', [CustomerSupportController::class, 'index'])->name('admin.customer-support.index');
+    Route::get('customer-support/{id}', [CustomerSupportController::class, 'show'])->name('admin.customer-support.show');
+    Route::delete('customer-support/{id}', [CustomerSupportController::class, 'destroy'])->name('admin.customer-support.destroy');
+    // Profile
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 });

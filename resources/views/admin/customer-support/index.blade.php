@@ -1,5 +1,5 @@
 @extends('layouts.admin.index')
-@section('title', 'Client Projects')
+@section('title', 'Customer Support')
 @section('vendor_css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css') }}">
 @endsection
@@ -22,14 +22,13 @@
                 </div>
             </div>
             <div class="content-body">
-                <a class="btn btn-outline-primary mb-1" href="{{ route('client-projects.create') }}">Add New Project</a>
                 <!-- DOM - jQuery events table -->
                 <section id="file-export">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">All Clients</h4>
+                                    <h4 class="card-title">All Client Messages</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -49,41 +48,29 @@
                                         <table class="table table-striped table-bordered file-export">
                                             <thead>
                                                 <tr>
-                                                    <th>Project Name</th>
-                                                    <th>Client</th>
-                                                    <th>Start At</th>
-                                                    <th>End At</th>
-                                                    <th>Progress</th>
+                                                    <th>Client Name</th>
+                                                    <th>Client Email</th>
+                                                    <th>Client Phone</th>
+                                                    <th>Subject</th>
+                                                    <th>Message</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @isset($clientProjects)
-                                                    @foreach ($clientProjects as $project)
+                                                @isset($messages)
+                                                    @foreach ($messages as $message)
                                                         <tr>
-                                                            <td>{{ $project->project_name }}</td>
-                                                            <td>MR. {{ $project->client->name }}</td>
-                                                            <td>{{ $project->start_at }}</td>
-                                                            <td>{{ $project->end_at }}</td>
-                                                            <td>
-                                                                @if($project->progress == 'complete')
-                                                                <span class="badge badge badge-pill badge-success badge-glow  mr-2">{{$project->progress}}</span>
-                                                            @elseif($project->progress == 'on progress')
-                                                                <span class="badge badge badge-pill badge-info badge-glow mr-2">{{$project->progress}}</span>
-                                                            @else
-                                                                <span class="badge badge badge-pill badge-danger badge-glow mr-2">{{$project->progress}}</span>
-                                                            @endif
-                                                            </td>
+                                                            <td>{{ $message->client_name }}</td>
+                                                            <td>{{ $message->client_email }}</td>
+                                                            <td>{{ $message->client_phone }}</td>
+                                                            <td>{{ $message->subject }}</td>
+                                                            <td>{{ Str::limit($message->msg, 150, '...') }}</td>
                                                             <td>
                                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                                    <a href="{{ route('client-projects.show', $project->id) }}" class="btn btn-min-width">
-                                                                        <i class="la la-edit"></i>
+                                                                    <a href="{{ route('admin.customer-support.show', $message->id) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                        SHOW
                                                                     </a>
-                                                                    <button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Add"><i class="la la-edit"></i></button>
-                                                                    <a href="" class="btn btn-outline-secondary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        UPDATE
-                                                                    </a>
-                                                                    <form action="{{ route('client-projects.destroy', $project->id) }}" method="POST">
+                                                                    <form action="{{ route('admin.customer-support.destroy', $message->id) }}" method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button type="submit"
@@ -97,11 +84,11 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Project Name</th>
-                                                    <th>Client</th>
-                                                    <th>Start At</th>
-                                                    <th>End At</th>
-                                                    <th>Progress</th>
+                                                    <th>Client Name</th>
+                                                    <th>Client Email</th>
+                                                    <th>Client Phone</th>
+                                                    <th>Subject</th>
+                                                    <th>Message</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </tfoot>
@@ -115,7 +102,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-
 @endsection

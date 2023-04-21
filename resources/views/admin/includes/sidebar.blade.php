@@ -18,7 +18,7 @@
                 <a href="">
                         <i class="la la-book"></i>
                         <span class="menu-title" data-i18n="nav.dash.main">{{ __('My Portfolio') }}</span>
-                        <span class="badge badge badge-success badge-glow badge-pill float-right mr-2">{{ App\Models\Project::count() }}</span>
+                        {{-- <span class="badge badge badge-success badge-glow badge-pill float-right mr-2">{{ App\Models\Project::count() }}</span> --}}
                 </a>
                 <ul class="menu-content">
                         @can('project-list')
@@ -83,6 +83,17 @@
 
                         {{-- @endcan --}}
                 </ul>
+                @endcan
+        </li>
+        {{-- Client Messages --}}
+        <li class="nav-item">
+                <!-- The current user can update the post... -->
+                @can('settings-list')
+                <a class="{{ Route::currentRouteNamed('admin.customer-support.index') ? 'active' : '' }}" href="{{ route('admin.customer-support.index') }}">
+                        <i class="la la-bullhorn icon-left"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">{{ __('Client Messages') }}</span>
+                        <span class="badge badge badge-pill badge-glow badge-danger float-right mr-2">{{ App\Models\CustomerSupport::count() }}</span>
+                </a>
                 @endcan
         </li>
         {{-- Users --}}

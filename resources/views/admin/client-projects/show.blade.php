@@ -1,4 +1,4 @@
-@extends('layouts.client.index')
+@extends('layouts.admin.index')
 @section('title', 'Project Summary')
 @section('vendor_css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/gallery/photo-swipe/photoswipe.css') }}">
