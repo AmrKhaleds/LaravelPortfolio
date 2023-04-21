@@ -67,14 +67,16 @@
                                                             <td>{{ Str::limit($message->msg, 150, '...') }}</td>
                                                             <td>
                                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                                    <a href="{{ route('admin.customer-support.show', $message->id) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        SHOW
+                                                                    <a href="{{ route('admin.customer-support.show', $message->id) }}" class="btn btn-primary btn-sm rounded-5 mr-1">
+                                                                        <i class="la la-eye"></i>
                                                                     </a>
                                                                     <form action="{{ route('admin.customer-support.destroy', $message->id) }}" method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button type="submit"
-                                                                            class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">DELETE</button>
+                                                                        class="btn btn-danger btn-sm rounded-5 mr-1">
+                                                                            <i class="la la-remove"></i>
+                                                                        </button>
                                                                     </form>
                                                                 </div>
                                                             </td>

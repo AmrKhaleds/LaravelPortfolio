@@ -172,7 +172,7 @@
                         <div class="card-body">
                             <div class="card-text" style="display: flex; justify-content: space-between;">
                                 <h5>All Project Photos</h5>
-
+                                {{-- Dowonload All Photos --}}
                                 <a class="btn btn-outline-primary mb-1"
                                     href="{{ route('client.download.photos', ['client' => $project->client->username, 'project' => $project->project_name]) }}">Download
                                     All Images</a>
@@ -267,8 +267,7 @@
                     <div class="card-content">
                         <div class="card-body">
                             <div class="card-text">
-                                <p>This section contain responsive embedded video gallery with grid
-                                    4-2-1 columns This demo contain vimeo and youtube embedded videos.</p>
+                                <p>All Project Videos</p>
                             </div>
                         </div>
                         <div class="card-body">
@@ -276,13 +275,9 @@
                                 @forelse($projectVideos as $video)
                                     <div class="col-lg-3 col-md-6 col-12">
                                         <div class="embed-responsive embed-responsive-item embed-responsive-16by9">
-                                            {{-- <iframe class="img-thumbnail"
-                                                src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" width="640"
-                                                height="360"></iframe> --}}
-                                                <video class="img-thumbnail" controls preload="none">
-                                                    {{-- <source src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" type="video/mp4"> --}}
-                                                    {{-- <source src="{{ Storage::disk('google')->url() }}" type="video/mp4"> --}}
-                                                </video>
+                                            <video class="img-thumbnail" controls preload="none">
+                                                <source src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" type="video/mp4">
+                                            </video>
                                         </div>
                                     </div>
                                 @empty

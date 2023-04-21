@@ -78,9 +78,6 @@
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                                    {{-- <a href="{{ route('client.trashed.restore', $client->username) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        RESTOR
-                                                                    </a> --}}
                                                                     <form action="{{ route('client.trashed.restore', $client->username) }}" method="POST">
                                                                         {{-- @method('DELETE') --}}
                                                                         @csrf

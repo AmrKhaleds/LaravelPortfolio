@@ -66,14 +66,16 @@
                                                         </td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-secondary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                    UPDATE
+                                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm rounded-5 mr-1">
+                                                                    <i class="la la-edit"></i>
                                                                 </a>
                                                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button type="submit"
-                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">DELETE</button>
+                                                                    class="btn btn-danger btn-sm rounded-5 mr-1">
+                                                                        <i class="la la-remove"></i>
+                                                                    </button>
                                                                 </form>
                                                             </div>
                                                         </td>

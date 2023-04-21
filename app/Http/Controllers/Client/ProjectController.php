@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\ClientProject;
 use Illuminate\Http\Request;
-use App\Http\Traits\DownloadDirectory;
+use App\Http\Traits\DownloadPhotosDirectory;
 
 class ProjectController extends Controller
 {
-    use DownloadDirectory;
+    use DownloadPhotosDirectory;
 
     public function index(){
         $currentClientLogedIn = auth('clients')->user()->id;
@@ -34,7 +34,6 @@ class ProjectController extends Controller
     }
 
     public function downloadPhotos(string $client, string $project){
-        // dd(storage_path('app/public/clients/photos/' . $dir . '.zip'));
         return $this->photosDirectoryDownload($client, $project);
     }
 }

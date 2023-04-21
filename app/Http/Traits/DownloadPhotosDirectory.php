@@ -5,14 +5,19 @@
     use Illuminate\Support\Facades\File;
     use Illuminate\Http\Response;
 
-    trait DownloadDirectory{
-        public function photosDirectoryDownload($client, $project)
+    trait DownloadPhotosDirectory{
+        
+        public function photosDirectoryDownload($clientDirName, $projectDirName)
         {
-            // dd($project);
             $zip = new ZipArchive;
-            $zipFile = storage_path('app/public/clients/photos/' . $client . '/' . $project . '.zip');
+            // Get Full Storage Path with .zip Extention
+            $zipFile = storage_path('app/public/clients/photos/' . $clientDirName . '/' . $projectDirName . '.zip');
+            // Get  Full Storage path for photos
+            $filesPath = storage_path('app/public/clients/photos/' . $clientDirName . '/' . $projectDirName );
+
             if($zip->open($zipFile, ZipArchive::CREATE) === true){
-                $files = File::allFiles(storage_path('app/public/clients/photos/' . $client . '/' . $project ));
+                // Get All Files as array
+                $files = File::allFiles($filesPath);
                 foreach($files as $file){
                     $zip->addFile($file, $file->getRelativePathname());
                 }

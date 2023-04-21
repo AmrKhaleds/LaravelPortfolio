@@ -30,11 +30,11 @@
                         </a>
                 </li>
                 
-                {{-- Settings --}}
+                {{-- Profile --}}
                 <li class="nav-item">
                         <!-- The current user can update the post... -->
-                        <a class="{{ Route::currentRouteNamed('') ? 'active' : '' }}" href="">
-                                <i class="ft-settings icon-left"></i>
+                        <a class="{{ Route::currentRouteNamed('client.my-profile.index') ? 'active' : '' }}" href="{{ route('client.my-profile.index') }}">
+                                <i class="la la-cogs"></i>
                                 <span class="menu-title" data-i18n="nav.dash.main">{{ __('Settings') }}</span>
                         </a>
                 </li>

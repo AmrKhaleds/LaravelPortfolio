@@ -171,7 +171,7 @@
                     <div class="card-content">
                         <div class="card-body">
                             <div class="card-text" style="display: flex; justify-content: space-between;">
-                                <h5>All Project Photos</h5>
+                                <h5>All your Project Photos. Enjoy 🥰</h5>
 
                                 <a class="btn btn-outline-primary mb-1"
                                     href="{{ route('client.download.photos', ['client' => $project->client->username, 'project' => $project->project_name]) }}">Download
@@ -192,8 +192,9 @@
                                         </a>
                                     </figure>
                                 @empty
-                                    <div class="col-12 text-center text-danger font-size-large">There is No Photos for this
-                                        project right now</div>
+                                    <div class="col-12 text-center text-danger font-size-large">
+                                        There are no photos for this project right now. We are still preparing these photos
+                                    </div>
                                 @endforelse
                                 {{-- @endempty --}}
                             </div>
@@ -267,8 +268,7 @@
                     <div class="card-content">
                         <div class="card-body">
                             <div class="card-text">
-                                <p>This section contain responsive embedded video gallery with grid
-                                    4-2-1 columns This demo contain vimeo and youtube embedded videos.</p>
+                                <p>All your Project Videos.</p>
                             </div>
                         </div>
                         <div class="card-body">
@@ -276,17 +276,15 @@
                                 @forelse($projectVideos as $video)
                                     <div class="col-lg-3 col-md-6 col-12">
                                         <div class="embed-responsive embed-responsive-item embed-responsive-16by9">
-                                            {{-- <iframe class="img-thumbnail"
-                                                src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" width="640"
-                                                height="360"></iframe> --}}
                                                 <video class="img-thumbnail" controls preload="none">
-                                                    {{-- <source src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" type="video/mp4"> --}}
-                                                    {{-- <source src="{{ Storage::disk('google')->url() }}" type="video/mp4"> --}}
+                                                    <source src="{{ asset('storage/clients/videos/' . $clientUsername . '/' . $project->project_name . '/' . $video->video_name) }}" type="video/mp4">
                                                 </video>
                                         </div>
                                     </div>
                                 @empty
-                                    There is no videos For this project
+                                    <div class="col-12 text-center text-danger font-size-large">
+                                        There are no videos for this project right now. We are still preparing these videos
+                                    </div>
                                 @endforelse
                             </div>
                         </div>

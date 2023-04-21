@@ -159,7 +159,7 @@
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
                                                                             <label for="old-password">Old Password</label>
-                                                                            <input type="old-password" id="old-password"
+                                                                            <input type="password" id="old-password"
                                                                                 class="form-control" placeholder="Old Password"
                                                                                 name="old-password">
                                                                             @error('old-password')
