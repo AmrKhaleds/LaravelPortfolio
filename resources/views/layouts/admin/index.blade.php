@@ -46,9 +46,14 @@
         @yield('content')
         @include ('admin.includes.footer')
 
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <!-- BEGIN VENDOR JS-->
         <script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
         <!-- BEGIN VENDOR JS-->
+        {{-- s:firebase fcm --}}
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+        {{-- e:firebase fcm --}}
         <!-- BEGIN PAGE VENDOR JS-->
         @yield('vendor_js')
         <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js') }}" type="text/javascript"></script>
@@ -100,6 +105,76 @@
         <!-- Custom Script -->
         @yield('custom_js')
         <!-- End Custom Script -->
+        <script src="{{ asset('firebase.js') }}"></script>
+        <script>
+    
+            //   Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const messaging = firebase.messaging();
+            messaging.usePublicVapidKey(
+                "BMxj_oS_n46u22bFQPBGfEYo5nASjQ66WnUjQxOa64YEvfGt-hA5wUlfoD7FRlfeQFKer_dZjTU7L8B-FmTyWtw");
+            messaging.requestPermission()
+                .then(function() {
+                    // console.log('genrated no permission');
+                    return messaging.getToken();
+                })
+                .then(function(token) {
+                    // console.log(token);
+                    /*
+                    {save user fcm_token code }
+                    Note copy it from Step 12 to save user fcm_token
+                    */
+                    $.ajax({
+                        url: "{{ route('save_device_token') }}",
+                        type: 'POST',
+                        data: {
+                            device_token: token,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'JSON',
+                        success: function(res) {
+                            console.log("Device Token Stored Successfully");
+    
+                        },
+                        error: function(err) {
+                            console.log("Can't do because: " + err);
+    
+                        },
+                    });
+                })
+                .catch(function(error) {
+                    console.log("There is Error : " + error);
+                });
+                messaging.onMessage((payload) => {
+                    console.log(payload);
+                    play(payload.notification);
+                    // var notify_input = document.getElementById('notification_count');
+                    // var notify_count = parseInt(notify_input.innerHTML);
+                    // notify_count = notify_count + 1;
+                    // notify_input.innerHTML = notify_count;
+                    // var noteData = JSON.parse(payload.data.fcmapp);
+                    // var ul = document.getElementById("notification_list");
+                    // var li = `
+                    //     <a uid="${noteData.id}" 
+                    //     href="jaavascript:;" class="dropdown-item">
+                    //     <span>${noteData.message}</span> 
+                    //     <sub>${noteData.created_at}</sub>
+                    //     </a>
+                    // `;
+                    // $("#notification_list").prepend(li);
+                });
+    
+            function play(n) {
+                options = {
+                    body: n.body,
+                    icon: n.icon,
+                    silent: 'false',
+                    sound: 'inflicted.ogg'
+                }
+                new Notification(n.title, options);
+    
+            }
+        </script>
     </body>
 </html>
 

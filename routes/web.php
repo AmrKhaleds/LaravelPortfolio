@@ -37,6 +37,7 @@ Auth::routes(['register' => false, 'reset' => false]);
 // Admin Dashboard
 Route::group(['prefix' => 'dashboard','middleware' => ['auth', 'checkStatus']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('save_device_token', [DashboardController::class, 'store_token'])->name('save_device_token');
     // Projects
     Route::resource('project', ProjectController::class); 
     // Settings

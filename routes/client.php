@@ -32,6 +32,7 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function(){
     }); 
     Route::group(['middleware' => ['auth:clients', 'clientCheckStatus']], function(){
         Route::get('dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
+        Route::post('/save_device_token', [ClientDashboardController::class, 'store_token'])->name('save_device_token');
         Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
         // Calendar
         Route::get('calendar', [ClientCalendarController::class, 'index'])->name('calendar');

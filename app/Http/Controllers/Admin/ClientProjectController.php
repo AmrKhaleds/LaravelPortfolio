@@ -84,7 +84,7 @@ class ClientProjectController extends Controller
             }
             return redirect()->route('client-projects.index')->with(['success' => 'Project Created Successfully.']);
         } catch(Exception $e){
-            return redirect()->route('client-projects.index')->with(['error' => 'There wase error when creating Project']);
+            dd($e);
         }
     }
 
