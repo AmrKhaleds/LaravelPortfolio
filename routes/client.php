@@ -30,7 +30,7 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function(){
         Route::post('register', [RegistrationController::class, 'register'])->name('register');
         
     }); 
-    Route::group(['middleware' => ['client', 'clientCheckStatus']], function(){
+    Route::group(['middleware' => ['auth:clients', 'clientCheckStatus']], function(){
         Route::get('dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
         Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
         // Calendar
