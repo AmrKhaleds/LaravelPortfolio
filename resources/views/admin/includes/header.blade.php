@@ -8,11 +8,11 @@
                         href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{ route('dashboard') }}">
-                        @if (file_exists(public_path('storage/images/logo/' . $dashboardSettings['white_logo'])))
+                        @if (file_exists(public_path('storage/images/lsogo/' . $dashboardSettings['white_logo'])))
                             <img style="width: 50px; " src="{{ asset('storage/images/logo/' . $dashboardSettings['white_logo']) }}"
                                 alt="My Image">
                         @else
-                            <img style="width: 300px;" src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
+                            <img style="width: 50px;" src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
                                 alt="My Image">
                         @endif
                         <h3 class="brand-text">{{ $dashboardSettings['site_name'] }}</h3>

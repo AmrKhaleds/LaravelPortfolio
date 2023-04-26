@@ -12,7 +12,7 @@
                             <img style="width: 50px;" src="{{ asset('storage/images/logo/' . $dashboardSettings['white_logo']) }}"
                                 alt="My Image">
                         @else
-                            <img style="width: 300px;" src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
+                            <img style="width: 50px;" src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
                                 alt="My Image">
                         @endif
                         <h3 class="brand-text">My WorkSpace</h3>
