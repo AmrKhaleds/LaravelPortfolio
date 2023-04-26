@@ -1,6 +1,8 @@
 @extends('layouts.client.index')
-@section('title')
-    Dashboard
+@section('title', 'Dashboard')
+@section('page_level_css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/simple-line-icons/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/pages/lobilist/lobilist.css') }}">
 @endsection
 @section('content')
     <div class="app-content content">
@@ -8,71 +10,56 @@
             <div class="content-header row"></div>
             <div class="content-body">
                 <div id="crypto-stats-3" class="row">
-                    <div class="col-xl-4 col-12">
-                        <a href="{{ route('client.project') }}">
-                            <div class="card crypto-card-3 pull-up">
-                                <div class="card-content">
-                                    <div class="card-body pb-0">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <h1><i class="cc ICN-alt danger font-large-2" title="ICN"></i>
-                                                </h1>
-                                            </div>
-                                            <div class="col-6 pl-2">
-                                                <h2>My Projects</h2>
-                                                {{-- <h6 class="text-muted"></h6> --}}
-                                            </div>
-                                            <div class="col-4 text-right">
-                                                <span class="badge badge badge-info badge-pill float-right mr-2">
-                                                    @isset($clientProjects)
-                                                        {{ count($clientProjects) }}
-                                                    @endisset
-                                                </span>
-                                                {{-- <h4>{{App\Models\Project::count()}}</h4> --}}
-                                            </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                        <div class="card bg-gradient-directional-danger pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="icon-rocket text-white font-large-2 float-left"></i>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <canvas id="btc-chartjs" class="height-75"></canvas>
+                                        <div class="media-body text-white text-right">
+                                            <h3 class="text-white">156</h3>
+                                            <span>My Projects</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
-                    <div class="col-xl-4 col-12">
-                        <a href="{{ route('client.project') }}">
-                            <div class="card crypto-card-3 pull-up">
-                                <div class="card-content">
-                                    <div class="card-body pb-0">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <h1><i class="cc GDC danger font-large-2" title="ICN"></i>
-                                                </h1>
-                                            </div>
-                                            <div class="col-6 pl-2">
-                                                <h2>My Storage Size</h2>
-                                                {{-- <h6 class="text-muted"></h6> --}}
-                                            </div>
-                                            <div class="col-4 text-right">
-                                                <span class="badge badge badge-danger badge-pill float-right mr-2">
-                                                    @isset($clientProjects)
-                                                        {{ count($clientProjects) }}
-                                                    @endisset
-                                                </span>
-                                                {{-- <h4>{{App\Models\Project::count()}}</h4> --}}
-                                            </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                        <div class="card bg-gradient-directional-danger pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="icon-pie-chart text-white font-large-2 float-left"></i>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <canvas id="eth-chartjs" class="height-75 chartjs-render-monitor" width="935" height="93" style="display: block; height: 75px; width: 748px;"></canvas>
+                                        <div class="media-body text-white text-right">
+                                            <h3 class="text-white">64.89 %</h3>
+                                            <span>Storage Usage</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12">
+                        <div class="card bg-gradient-directional-danger pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="icon-speech text-white font-large-2 float-left"></i>
+                                        </div>
+                                        <div class="media-body text-white text-right">
+                                            <h3 class="text-white">156</h3>
+                                            <span>Customer Support Tickets</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -26,11 +26,14 @@ class ProjectController extends Controller
         $projectPhotos = $project->client_project_photos;
         $projectVideos = $project->client_project_videos;
         $projectVideos = $project->client_project_videos;
-        $photoDir = 'public/clients/photos/' . $clientUsername . '/';
         $clientDir = $project->client->username . '/' . $project->project_name;
-        // dd($clientDir);
+        // Get Total Project Size
+        $photoDir = public_path('storage/clients/photos/' . $clientDir);
+        $videoDir = public_path('storage/clients/videos/' . $clientDir);
+        $projectTotalSize = getDirectorySize($photoDir) + getDirectorySize($videoDir);
         
-        return view('client.projects.show', compact('projectPhotos', 'projectVideos', 'projectVideos', 'clientUsername', 'project', 'clientDir'));
+        // dd($projectTotalSize);
+        return view('client.projects.show', compact('projectPhotos', 'projectVideos', 'projectVideos', 'clientUsername', 'project', 'clientDir', 'projectTotalSize'));
     }
 
     public function downloadPhotos(string $client, string $project){
