@@ -8,9 +8,14 @@
                         href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{ route('dashboard') }}">
-                        <img class="brand-logo" alt="modern admin logo"
-                            src="{{ asset('assets/admin/images/logo/Add-You-Black(light).png') }}">
-                        <h3 class="brand-text">ADD YOU</h3>
+                        @if (file_exists(public_path('storage/images/logo/' . $dashboardSettings['white_logo'])))
+                            <img style="width: 50px;" src="{{ asset('storage/images/logo/' . $dashboardSettings['white_logo']) }}"
+                                alt="My Image">
+                        @else
+                            <img style="width: 300px;" src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
+                                alt="My Image">
+                        @endif
+                        <h3 class="brand-text">{{ $dashboardSettings['site_name'] }}</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">
@@ -52,7 +57,7 @@
                         </div>
                     </li>
 
-                    <li class="dropdown dropdown-notification nav-item">
+                    {{-- <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i
                                 class="ficon ft-bell"></i>
                             <span
@@ -242,7 +247,7 @@
                             <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
                                     href="javascript:void(0)">Read all messages</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

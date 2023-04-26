@@ -8,8 +8,13 @@
                         href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{ route('client.dashboard') }}">
-                        <img class="brand-logo" alt="modern admin logo"
-                            src="{{ asset('assets/admin/images/logo/Add-You-Black(light).png') }}">
+                        @if (file_exists(public_path('storage/images/logo/' . $dashboardSettings['white_logo'])))
+                            <img style="width: 50px;" src="{{ asset('storage/images/logo/' . $dashboardSettings['white_logo']) }}"
+                                alt="My Image">
+                        @else
+                            <img style="width: 300px;" src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
+                                alt="My Image">
+                        @endif
                         <h3 class="brand-text">My WorkSpace</h3>
                     </a>
                 </li>
@@ -91,7 +96,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown dropdown-notification nav-item">
+                    {{-- <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i
                                 class="ficon ft-mail"> </i></a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
@@ -183,7 +188,7 @@
                             <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
                                     href="javascript:void(0)">Read all messages</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

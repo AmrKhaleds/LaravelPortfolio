@@ -1,23 +1,26 @@
 <?php
-
-use App\Http\Controllers\Client\Auth\LoginController;
-use App\Http\Controllers\Client\Auth\LogoutController;
-use App\Http\Controllers\Client\Auth\RegistrationController;
-use App\Http\Controllers\Client\ClientCalendarController;
-use App\Http\Controllers\Client\ClientDashboardController;
-use App\Http\Controllers\Client\ClientProfileController;
-use App\Http\Controllers\Client\CustomerSupport;
-use App\Http\Controllers\Client\CustomerSupportController;
-use App\Http\Controllers\Client\ProjectController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;    
+use App\Http\Controllers\Client\{
+    Auth\LoginController,
+    Auth\LogoutController,
+    Auth\RegistrationController,
+    ClientCalendarController,
+    ClientDashboardController,
+    ClientProfileController,
+    CustomerSupport,
+    CustomerSupportController,
+    ProjectController
+};
+use Illuminate\Support\Facades\{
+    Route,
+    Auth
+};   
 
 /*
 |--------------------------------------------------------------------------
 | Client Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can register Client routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
@@ -30,7 +33,7 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function(){
         Route::post('register', [RegistrationController::class, 'register'])->name('register');
         
     }); 
-    Route::group(['middleware' => ['auth:clients', 'clientCheckStatus']], function(){
+    Route::group(['middleware' => ['client', 'clientCheckStatus']], function(){
         Route::get('dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
         Route::post('/save_device_token', [ClientDashboardController::class, 'store_token'])->name('save_device_token');
         Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
@@ -51,5 +54,3 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function(){
         Route::delete('support/{id}', [CustomerSupportController::class, 'destroy'])->name('support.destroy');
     });
 });
-// Route::get('client-register', [RegistrationController::class, 'showRegistrationForm'])->name('client.regiser.form');
-// Route::post('client-register', [RegistrationController::class, 'register'])->name('client.register');

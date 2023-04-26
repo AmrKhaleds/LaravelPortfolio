@@ -15,8 +15,10 @@ use App\Http\Controllers\Front\{
     ProjectController as FrontProjectController,
     WebsiteController
 };
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;    
+use Illuminate\Support\Facades\{
+    Route,
+    Auth
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +34,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [WebsiteController::class, 'index'])->name('front');
 Route::get('/project/{slug}', [FrontProjectController::class, 'showProject'])->name('show');
 
-
 Auth::routes(['register' => false, 'reset' => false]);
+
 // Admin Dashboard
 Route::group(['prefix' => 'dashboard','middleware' => ['auth', 'checkStatus']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

@@ -27,7 +27,7 @@ class SettingsRequest extends FormRequest
             'black_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'about' => 'string|max:500',
             'contact_email' => 'email',
-            'contact_phone' => 'numeric|digits:11',
+            'contact_phone' => 'digits_between:10,11',
             'copyright' => 'string|max:70',
             'newsletter' => 'string|max:100',
         ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\ClientProject;
+use GeneralSettings;
 use Illuminate\Http\Request;
 
 class ClientDashboardController extends Controller
