@@ -9,7 +9,7 @@
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{ route('dashboard') }}">
                         @if (file_exists(public_path('storage/images/logo/' . $dashboardSettings['white_logo'])))
-                            <img style="width: 50px;" src="{{ asset('storage/images/logo/' . $dashboardSettings['white_logo']) }}"
+                            <img style="width: 50px; " src="{{ asset('storage/images/logo/' . $dashboardSettings['white_logo']) }}"
                                 alt="My Image">
                         @else
                             <img style="width: 300px;" src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
