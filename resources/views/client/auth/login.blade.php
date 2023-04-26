@@ -14,9 +14,10 @@
                             <div class="card border-grey border-lighten-3 px-2 py-2 m-0">
                                 <div class="card-header border-0">
                                     <div class="card-title text-center">
-                                        @if (file_exists(public_path('storage/images/logo/' . $white_logo)))
-                                            <img style="width: 300px;"
-                                                src="{{ asset('storage/images/logo/' . $white_logo) }}" alt="My Image">
+                                        @if (file_exists(public_path('storage/images/logo/' . $dashboardSettings['white_logo'])))
+                                            <img style="width: 300px; "
+                                                src="{{ asset('storage/images/logo/' . $dashboardSettings['white_logo']) }}"
+                                                alt="My Image">
                                         @else
                                             <img style="width: 300px;"
                                                 src="{{ asset('assets/admin/images/logo/defaultLogo.png') }}"
