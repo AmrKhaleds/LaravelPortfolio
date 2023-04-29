@@ -194,8 +194,8 @@
                                     <a href="{{ asset('storage/clients/photos/' . $clientUsername . '/' . $project->project_name . '/' . $photo->photo_name) }}"
                                         itemprop="contentUrl" data-size="2000x2000">
                                         <img class="img-thumbnail img-fluid"
-                                            src="{{ asset('storage/clients/photos/' . $clientUsername . '/' . $project->project_name . '/' . $photo->photo_name) }}"
-                                            itemprop="thumbnail" alt="{{ $photo->photo_name }}">
+                                            src="{{ asset('storage/clients/photos/' . $clientUsername . '/' . $project->project_name . '/thumbnail/' . $photo->thumbnail) }}"
+                                            itemprop="thumbnail" alt="{{ $photo->photo_name }}" loading="lazy">
                                     </a>
                                 </figure>
                             @empty

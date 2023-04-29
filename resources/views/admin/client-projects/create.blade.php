@@ -160,7 +160,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="formFileLg" class="form-label">Project Photos: <span style="color:red;">*</span>.png, .jpg, .jpeg, .webp</label>
-                                                            <input class="dropify" type="file" name="photo_name[]" id="formFileLg" class="form-control form-control-lg" data-max-files="10" data-show-errors="true" data-allowed-file-extensions="png jpg jpeg webp" data-max-file-size="30M" multiple>
+                                                            <input class="dropify" type="file" name="photo_name[]" id="formFileLg" class="form-control form-control-lg" data-max-files="70" data-show-errors="true" data-allowed-file-extensions="png jpg jpeg webp" data-max-file-size="1024" multiple>
                                                             @error('photo_name')
                                                                 <span id="photo_name_error" class="text-danger">{{ $message }}</span>
                                                             @enderror

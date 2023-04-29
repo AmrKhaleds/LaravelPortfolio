@@ -9,7 +9,7 @@ class ClientProjectPhotos extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['project_id', 'photo_name'];
+    protected $fillable = ['project_id', 'photo_name', 'thumbnail'];
 
     public function client_project(){
         return $this->belongsTo(ClientProject::class);
